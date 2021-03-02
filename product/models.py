@@ -3,6 +3,8 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from django_countries.fields import CountryField
 
+# from django.db.models import signals
+from django.utils.text import slugify
 
 
 # Possui informações dos produtos
@@ -25,6 +27,7 @@ class Product(models.Model):
     brand= models.ForeignKey('Brand',on_delete=models.SET_NULL, null=True)
     price = models.DecimalField(max_digits=6,decimal_places=2)
     created = models.DateTimeField(default=now)
+    slug = models.SlugField('slug', max_length=100, blank=True, editable=False)
 
     class Meta:
         verbose_name = 'Produto'
@@ -32,6 +35,14 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.slug and self.name:
+            self.slug = slugify(self.name)
+        super(Product, self).save(*args, **kwargs)
+
+
+
 
 class ProductImages(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -43,7 +54,6 @@ class ProductImages(models.Model):
 
     def __str__(self):
         return self.product.name
-
 
 class Category(models.Model):
     category_name = models.CharField(max_length=100)
@@ -67,3 +77,6 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.brand_name
+
+
+
