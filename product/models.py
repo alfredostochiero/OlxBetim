@@ -13,9 +13,9 @@ from django.utils.text import slugify
 class Product(models.Model):
 
     condition_type = (
-        ("New","Novo"),
-        ("Semi_new","Semi-novo"),
-        ("Used","Usado"),
+        ("Novo","Novo"),
+        ("Semi-novo","Semi-novo"),
+        ("Usado","Usado"),
     )
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE) # Quando um usuário for deletado do banco, seus produtos também serão.
@@ -26,8 +26,9 @@ class Product(models.Model):
     category =  models.ForeignKey('Category',on_delete=models.SET_NULL,null=True)
     brand= models.ForeignKey('Brand',on_delete=models.SET_NULL, null=True)
     price = models.DecimalField(max_digits=6,decimal_places=2)
+    image = models.ImageField(upload_to='main_product/', blank=True, null=True)
     created = models.DateTimeField(default=now)
-    slug = models.SlugField('slug', max_length=100, blank=True, editable=False)
+    slug = models.SlugField('slug', max_length=100, blank=True, editable=False, unique=True)
 
     class Meta:
         verbose_name = 'Produto'
