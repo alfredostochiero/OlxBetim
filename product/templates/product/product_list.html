@@ -415,24 +415,26 @@
 				<div class="clearfix"></div>
 			</div>
 			<div class="all-categories">
-				<h3> Select your category and find the perfect ad</h3>
+				<h3> Escolha uma categoria ! </h3>
 				<ul class="all-cat-list">
 					{% for category in categorylist %}
 						<li><a href="{% url 'product:product_list_category' category.slug  %}">{{category.category_name}}<span class="num-of-ads">({{category.total_products}})</span></a></li>
 					{% endfor %}
-
 				</ul>
 			</div>
 			<ol class="breadcrumb" style="margin-bottom: 5px;">
-			  <li><a href="index.html">Home</a></li>
-			  <li class="active">All Ads</li>
+			  <li><a href="#">Home</a></li>
+				<li class="active"><a href="{% url 'products:product_list' %}" >Todos os anúncios </a>  </li>
+				{% if category %}
+					<li class="active">{{category}}</li>
+				{% endif %}
 			</ol>
 			<div class="ads-grid">
 				<div class="side-bar col-md-3">
 					<div class="search-hotel">
-					<h3 class="sear-head">Name contains</h3>
-					<form>
-						<input type="text" value="Product name..." onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Product name...';}" required="">
+					<h3 class="sear-head">Pesquisa : </h3>
+					<form METHOD="get" action="{% url 'product:product_list' %}">
+						<input type="text" placeholder="nome ou marca" name="q" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Product name...';}" required="">
 						<input type="submit" value=" ">
 					</form>
 				</div>
