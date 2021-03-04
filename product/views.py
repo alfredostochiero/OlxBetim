@@ -5,15 +5,20 @@ from django.db.models import Count
 
 # Create your views here.
 
-def product_list(request):
+def product_list(request, category_slug=None):
+    category = None
     productlist = Product.objects.all()
-    category_list = Category.objects.annotate(total_products=Count('product'))
+    categorylist = Category.objects.annotate(total_products=Count('product'))
+
+    if category_slug :
+        category = Category.objects.get(slug=category_slug)
+        productlist = productlist.filter(category=category)
 
     paginator = Paginator(productlist, 2)
     page = request.GET.get('page')
     productlist = paginator.get_page(page)
 
-    context = {'productlist': productlist, 'category_list': category_list}
+    context = {'productlist': productlist, 'categorylist': categorylist}
     return render(request, 'product/product_list.html', context)
 
 

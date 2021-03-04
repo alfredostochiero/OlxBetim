@@ -28,7 +28,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=6,decimal_places=2)
     image = models.ImageField(upload_to='main_product/', blank=True, null=True)
     created = models.DateTimeField(default=now)
-    slug = models.SlugField('slug', max_length=100, blank=True, editable=False, unique=True)
+    slug = models.SlugField('slug', max_length=100, blank=True, editable=False)
 
     class Meta:
         verbose_name = 'Produto'
@@ -57,8 +57,9 @@ class ProductImages(models.Model):
         return self.product.name
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=100)
+    category_name = models.CharField(max_length=100,unique=True)
     image = models.ImageField(upload_to='categories/', blank=True, null=True)
+    slug = models.SlugField(max_length=100, blank=True, editable=False)
 
     class Meta:
         verbose_name = 'Categoria'
@@ -66,6 +67,11 @@ class Category(models.Model):
 
     def __str__(self):
         return self.category_name
+
+    def save(self, *args, **kwargs):
+        if not self.slug and self.category_name:
+            self.slug = slugify(self.category_name)
+        super(Category, self).save(*args, **kwargs)
 
 
 class Brand(models.Model):
