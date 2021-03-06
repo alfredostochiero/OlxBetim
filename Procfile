@@ -1,2 +1,2 @@
-web: gunicorn Olx-Betim.wsgi
+web: gunicorn OlxBetim.wsgi
 
