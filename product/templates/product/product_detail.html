@@ -7,12 +7,13 @@
 			<div class="container">
 				<ol class="breadcrumb" style="margin-bottom: 5px;">
 					<li><a href="{% url 'products:product_list' %}">Home</a></li>
-					<li><a href="all-classifieds.html">Todos os anúncios</a></li>
-					<li class="active"><a href="mobiles.html">Mobiles</a></li>
+					<li><a href="{% url 'products:product_list' %}">Todos os anúncios</a></li>
+					<li class="active"><a href="../products/{{product.category.slug}}">{{product.category }}</a></li>
 				</ol>
 				<div class="product-desc">
 					<div class="col-md-7 product-view">
-						<h2>{{ product.name }}</h2>
+						<h2>{{product.name}}</h2>
+
 						<p> <i class="glyphicon glyphicon-map-marker"></i><a href="#">state</a>, <a href="#">city</a>| Adicionado em {{ product.created }}</p>
 						<div class="flexslider">
 							<ul class="slides">
@@ -42,7 +43,7 @@
 						<!-- //FlexSlider -->
 						<div class="product-details">
 							<h4>Marca :  <a href="#">{{ product.brand }}</a></h4>
-							<h4>Views : <strong>150</strong></h4>
+							<h4>Vendedor : <strong style="text-transform:capitalize">{{ product.owner }}</strong></h4>
 							<p><strong>Descrição:</strong> : {{ product.description }}</p>
 
 						</div>
@@ -66,7 +67,7 @@
 							</div>
 						</div>
 						<div class="interested text-center">
-							<h4>Interested in this Ad?<small> Contact the Seller!</small></h4>
+							<h4>Ficou interessado nesse anuncio ?<small> Entre em contato com o Vendedor !</small></h4>
 							<p><i class="glyphicon glyphicon-earphone"></i>00-85-9875462655</p>
 						</div>
 							<div class="tips">

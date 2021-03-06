@@ -11,17 +11,17 @@
 
 					{% for category in all_category %}
 
-					<div class="col-md-2 focus-grid">
-						<a href="categories.html">
-							<div class="focus-border">
-								<div class="focus-layout">
-									<img src="{{category.image.url}}">
-									<!-- <div class="focus-image"><i class="fa fa-mobile"></i></div> -->
-									<h4 class="clrchg">{{category}} </h4>
+						<div class="col-md-2 focus-grid">
+							<a href="{% url 'product:product_list_category' category.slug  %}">
+								<div class="focus-border">
+									<div class="focus-layout">
+										<img src="{{category.image.url}}">
+										<!-- <div class="focus-image"><i class="fa fa-mobile"></i></div> -->
+										<h4 class="clrchg">{{category}} </h4>
+									</div>
 								</div>
-							</div>
-						</a>
-					</div>
+							</a>
+						</div>
 
 					{% endfor %}
 

@@ -57,9 +57,9 @@ class ProductImages(models.Model):
         return self.product.name
 
 class Category(models.Model):
-    category_name = models.CharField(max_length=100,unique=True)
+    category_name = models.CharField(max_length=100,unique=True,null=False)
     image = models.ImageField(upload_to='categories/', blank=True, null=True)
-    slug = models.SlugField(max_length=100, blank=True, editable=False)
+    slug = models.SlugField(default=slugify(category_name),max_length=100, blank=True, unique=True)
 
     class Meta:
         verbose_name = 'Categoria'

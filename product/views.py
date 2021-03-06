@@ -12,9 +12,10 @@ def product_list(request, category_slug=None):
     category = None
     productlist = Product.objects.all()
     categorylist = Category.objects.annotate(total_products=Count('product'))
-    user =''
+    user = ''
     if str(request.user) != 'AnonymousUser':
         user = request.user
+
 
     if category_slug :
         category = get_object_or_404(Category, slug=category_slug)
@@ -43,9 +44,13 @@ def product_list(request, category_slug=None):
 
 def product_detail(request, product_slug):
 
+    user = ''
+    if str(request.user) != 'AnonymousUser':
+        user = request.user
+
     product = get_object_or_404(Product, slug=product_slug)
 
     product_images = ProductImages.objects.filter(product=product)
-    context = {'product': product, 'product_images': product_images}
+    context = {'product': product, 'product_images': product_images, 'user':user,}
 
-    return render(request, 'product/product_detail.html', context)
+    return render(request, 'product/product_detail.html', context,)

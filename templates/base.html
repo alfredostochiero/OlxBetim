@@ -78,11 +78,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="header">
 		<div class="container">
 			<div class="logo">
-				<a href="{% url 'products:product_list' %}"><span>Olx</span>Betim</a>
+				<a href="{% url 'products:product_list' %}"><span>Olx</span>Betim
+					{% if user != 'AnonymousUser' and user != '' %}
+					 Bem vindo : {{user}}
+					{% endif %}
+				</a>
+
 			</div>
 			<div class="header-right">
 			<a class="account" href="/accounts/login">Minha Conta</a><br>
-			{{user}}
+
 
 		</div>
 		</div>
@@ -166,7 +171,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</ul>
 				</div>
 				<div class="copyrights">
-					<p> © 2021 OlxBetim. Todos os direitos reservados | Alfredo Stochiero  <a href="http://w3layouts.com/"> W3layouts</a></p>
+					<p> © 2021 OlxBetim. Todos os direitos reservados | Alfredo Stochiero
 				</div>
 				<div class="clearfix"></div>
 			</div>
