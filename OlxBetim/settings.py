@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'product',
     'django_countries',
     'bootstrap4',
+    'home',
 
 ]
 

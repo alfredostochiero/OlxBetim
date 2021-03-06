@@ -12,6 +12,9 @@ def product_list(request, category_slug=None):
     category = None
     productlist = Product.objects.all()
     categorylist = Category.objects.annotate(total_products=Count('product'))
+    user =''
+    if str(request.user) != 'AnonymousUser':
+        user = request.user
 
     if category_slug :
         category = get_object_or_404(Category, slug=category_slug)
@@ -34,7 +37,7 @@ def product_list(request, category_slug=None):
     page = request.GET.get('page')
     productlist = paginator.get_page(page)
 
-    context = {'productlist': productlist, 'categorylist': categorylist, 'category': category}
+    context = {'productlist': productlist, 'categorylist': categorylist, 'category': category, 'user': user}
     return render(request, 'product/product_list.html', context)
 
 
