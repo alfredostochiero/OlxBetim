@@ -1,2 +1,2 @@
-web: gunicorn Olx-Betim.wsgi --log.file -
+web: gunicorn OlxBetim.wsgi --log.file -
 
