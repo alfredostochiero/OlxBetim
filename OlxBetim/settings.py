@@ -31,6 +31,23 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
+# Database para producção
+
+DATABASES = {
+    'default': dj_database_url.config()
+}
+
+# Database para desenvolvimento
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+
+
 
 # Application definition
 
@@ -85,20 +102,7 @@ WSGI_APPLICATION = 'OlxBetim.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 
-# Database para producção
 
-DATABASES = {
-    'default': dj_database_url.config()
-}
-
-# Database para desenvolvimento
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 
 # Password validation
